@@ -39,7 +39,9 @@ var ContentGenerate = /** @class */ (function () {
         this.headerTag = document.getElementById("dynamic");
     }
     ContentGenerate.prototype.sortDatabyName = function () {
-        this.data.sort(this.SortByName);
+        drop = document.getElementById("drop");
+        if (drop["in"])
+            this.data.sort(this.SortByName);
         this.dynamicGenerate();
     };
     ContentGenerate.prototype.SortByName = function (a, b) {
@@ -73,7 +75,6 @@ var ContentGenerate = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         input = document.getElementById("search");
-                        console.log(input.value + ",dgbdgkjdb");
                         keys = input.value;
                         uri = "https://localhost:44386/api/blog/user/" + keys + "";
                         return [4 /*yield*/, this.getApiCall(uri)];
@@ -131,6 +132,7 @@ var ContentGenerate = /** @class */ (function () {
     };
     ContentGenerate.prototype.dynamicGenerate = function () {
         var loop = 0;
+        this.headerTag.innerHTML = "";
         for (loop = 0; loop < this.data.length; loop++) {
             this.headerTag.innerHTML += "<div class=\"container\" style=\"margin-top:10px;width:30%; float: left;\">\n            <div class=\"row\">\n\n                <div class=\"col-sm-4\">\n                    <div class=\"thumbnail\">\n\n                        <p ><strong id=\"name" + loop + "\">User Name :=</strong></p>\n                        <p ><strong id=\"nationality" + loop + "\">Nationality := </strong></p>\n                        <p ><strong id=\"isIndian" + loop + "\"> Is Indian := </strong></p>\n\n                        <p ><strong id=\"address" + loop + "\">Address :=</strong></p>\n                        <p ><strong id=\"contactDetail" + loop + "\">Phone Number := </strong></p>\n                        <p ><strong id=\"age" + loop + "\" class=\"address\">age := </strong></p>\n                        <p ><strong id=\"CompanyExp" + loop + "\" class=\"address\">age := </strong></p>\n\n                    </div>\n                </div>\n\n            </div>\n        </div>";
         }

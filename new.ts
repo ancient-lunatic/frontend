@@ -9,7 +9,8 @@ class ContentGenerate
 
     sortDatabyName()
     {
-        
+        drop = document.getElementById("drop");
+        if(drop.in)
         this.data.sort(this.SortByName)
         this.dynamicGenerate();
     }
@@ -77,6 +78,7 @@ class ContentGenerate
     dynamicGenerate()
     {
     let loop = 0;
+    this.headerTag.innerHTML = "";
         for (loop = 0; loop < this.data.length; loop++)
         {
             this.headerTag.innerHTML  += `<div class="container" style="margin-top:10px;width:30%; float: left;">
