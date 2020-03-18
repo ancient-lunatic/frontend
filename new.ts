@@ -1,17 +1,49 @@
-
 class ContentGenerate
 {   
+    salutation : number
+    firstName  : string
+    middleName : string
+    lastName : string
+    addressLine1 : string
+    addressLine2 : string
+    Locality : string
+    city : number
+    state : number
+    country:number
+    bodyData :any
+
+
+
+
+
+
     data : any;
     size : number;
     url :string;
-    headerTag = document.getElementById("dynamic");
+    headerTag = (document.getElementById("dynamic") as HTMLInputElement);
 
 
     sortDatabyName()
     {
-        drop = document.getElementById("drop");
-        if(drop.in)
+        let drop = (document.getElementById("drop") as HTMLSelectElement);
+
+
+        // if("suraj" < "surai")
+        // console.log("yes")
+        // if("sures" > "suraj")
+        // console.log("np")
+        if(drop.selectedIndex == 2)
+        {
         this.data.sort(this.SortByName)
+        console.log("1");
+    }
+        if(drop.selectedIndex == 1)
+        {
+            this.data.sort(this.SortByAge)
+            console.log("2");
+        }
+        
+        
         this.dynamicGenerate();
     }
 
@@ -27,13 +59,13 @@ class ContentGenerate
     }
     SortByAge(a,b)
     {
-        if(a.age.years > b.age.years)return -1;
-        else if(a.age.years > b.age.years) return 1;
-       else if(a.age.months < b.age.months)return -1;
-       else if(a.age.months > b.age.months) return 1;
-       else if(a.age.days < b.age.days) return -1;
-       else if(a.age.days > b.age.days) return 1;
-       else return 0;
+        if(a.age.year!=b.age.year)
+        {
+            if(a.age.year>b.age.year) return 1;
+            else if(a.age.year<b.age.year) return -1;
+        }
+        else 
+        return 0;
         
       // return ((a.age.months < b.age.months) ? -1 : ((a.age.months>b.age.months) ? 1 : 0));
    }
@@ -75,6 +107,35 @@ class ContentGenerate
         return data;
     }
 
+    async DeleteUserById(id)
+    {
+       let x =  document.getElementById(id).getAttribute("dataval");
+        //let input = (document.getElementById("search") as  HTMLInputElement);
+     
+        //let keys = input.value;
+        let uri = "https://localhost:44386/api/blog/userdel/"+x+"";
+        let response = await fetch(uri,
+            {
+            method: 'DELETE',
+         
+            // body: JSON.stringify()
+        })
+       // let data =await this.getApiCall(uri);
+        //this.data = await data;
+        console.log(this.data);
+        this.getAllUser();
+        // return data;
+    }
+
+
+
+     navigate(id) {
+        let x =  document.getElementById(id).getAttribute("dataval");
+        localStorage["id"]= x;
+          let  url = "file:///C:/Users/ssrawat/Desktop/frontend/script/userform.html";
+        document.location.href = url;
+    }
+
     dynamicGenerate()
     {
     let loop = 0;
@@ -83,39 +144,30 @@ class ContentGenerate
         {
             this.headerTag.innerHTML  += `<div class="container" style="margin-top:10px;width:30%; float: left;">
             <div class="row">
-
-                <div class="col-sm-4">
-                    <div class="thumbnail">
-
-                        <p ><strong id="name${loop}">User Name :=</strong></p>
-                        <p ><strong id="nationality${loop}">Nationality := </strong></p>
-                        <p ><strong id="isIndian${loop}"> Is Indian := </strong></p>
-
-                        <p ><strong id="address${loop}">Address :=</strong></p>
-                        <p ><strong id="contactDetail${loop}">Phone Number := </strong></p>
-                        <p ><strong id="age${loop}" class="address">age := </strong></p>
-                        <p ><strong id="CompanyExp${loop}" class="address">age := </strong></p>
-
-                    </div>
+            <div class="col-sm-4">
+   
+                <div class="thumbnail" style=" background-color :cadetblue;padding :20Px;line-height : 26pt; border-radius: 25px;"> 
+                    <button id ="user${loop}" dataval="${this.data[loop]["userId"]}"  style="float:right; font-size:15px;" onClick ="new ContentGenerate().DeleteUserById(this.id)">DELETE</button>
+                    <button class="btn btn-success" id ="user${loop}" dataval="${this.data[loop]["userId"]}"style="float:left; font-size:15px;" onClick = "sam.navigate(this.id)">EDIT</button>
+                    <br>
+                       
+                    <p ><strong id="name${loop}">User Name := ${this.data[loop]["name"]}</strong></p>
+                    <p ><strong id="nationality${loop}">Nationality := ${this.data[loop]["nationality"]}</strong></p>
+                    <p ><strong id="isIndian${loop}"> Is Indian := ${(this.data[loop]["isIndian"]==true ? "yes" : "no")}</strong></p>
+                     <p ><strong id="address${loop}">Address :=   ${this.data[loop]["address"]}</strong></p>
+                    <p ><strong id="contactDetail${loop}">Phone Number := ${this.data[loop]["contactDetail"]["primary"]}</strong></p>
+                    <p ><strong id="age${loop}" class="address">age := ${this.data[loop]["age"]["year"] + " years"}</strong></p>
+                    <p ><strong id="CompanyExp${loop}" class="address">age := ${this.data[loop]["currentCompanyExp"]}</strong></p>
+                   
+               
                 </div>
-
             </div>
-        </div>`
-        }
-
-        for (loop = 0; loop < this.data.length; loop++)
-        {
-            document.getElementById("name"+loop).innerText = " " + this.data[loop]["name"];
-            document.getElementById("nationality"+loop).innerText = " " + this.data[loop]["nationality"];
-            document.getElementById("isIndian"+loop).innerText = " " + (this.data[loop]["isIndian"]==true ? "yes" : "no");
-            document.getElementById("address"+loop).innerText = " " + this.data[loop]["address"];
-            document.getElementById("contactDetail"+loop).innerText = " " + this.data[loop]["contactDetail"]["primary"];
-            document.getElementById("age"+loop).innerText = " " + this.data[loop]["age"]["year"] + " years";
-            document.getElementById("CompanyExp"+loop).innerText = " " + this.data[loop]["currentCompanyExp"];
+        </div>
+    </div>`
         }
  
         
-    }
+    }    
 
 }
 var sam = new ContentGenerate()

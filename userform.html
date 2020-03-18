@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <title>
+            user Details
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container" style="width:40% ;margin-top:30px;">
+        <!-- <form  onsubmit="" > -->
+          <div class="form-group">
+            
+            <label for="salutation">Choose your salutation</label>
+            <select id="salutation">
+              <option value="Mr.">Mr.</option>
+              <option value="Mrs.">Mrs.</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms.">Ms.</option>
+              <option value="Dr.">Dr.</option>
+            </select>
+          </div>
+          
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input type="text" class="form-control" id="firstname" name="firstname"  value="" placeholder="Enter First Name">
+             
+            </div>
+            <div class="form-group">
+                <label for="middlename">Middle Name</label>
+                <input type="text" class="form-control" id="middlename" name="middlename"  value="" placeholder="Enter Middle Name">
+               
+              </div>
+              <div class="form-group">
+                <label for="lastname" >Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname"  value="" placeholder="Enter last Name">
+               
+              </div>
+              
+            
+                <div class="form-group">
+            
+                  <label for="salutation">Choose your Gender</label>
+      
+                  <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Others</option>
+                   
+                  </select>
+      
+                
+    
+              </div>
+              <div class="form-group">
+                <label for="addressLine1">AddressLine1</label>
+                <input type="text" class="form-control" id="addressLine1" name="addressLine1"  value="" placeholder="Enter addressLine1">
+               
+              </div>
+              <div class="form-group">
+                <label for="addressLine2">AddressLine2</label>
+                <input type="text" class="form-control" id="addressLine2" name="addressLine2"  value="" placeholder="Enter addressLine2">
+               
+              </div>
+              <div class="form-group">
+                <label for="Locality">Locality</label>
+                <input type="text" class="form-control" id="locality" name="locality"  value="" placeholder="Enter Locality">
+               
+              </div>
+              <div class="form-group">
+            
+                <label for="city">City</label>
+    
+                <select id="city">
+                  <option value="Waras">Waras</option>
+                  <option value="Orange">Orange</option>
+                  <option value="NewCastel">NewCastel</option>
+                 
+                </select>
+    
+              
+  
+            </div>
+            <div class="form-group">
+            
+              <label for="state">State</label>
+  
+              <select id="state">
+                <option value="Bamyan">Bamyan</option>
+                <option value="Béjaïa">Bejala</option>
+                
+               
+              </select>
+  
+            
+          </div>
+          <div class="form-group">
+            
+            <label for="country">Country</label>
+            <select id="country">
+              <option value="Afganistan">Afghanistan</option>
+              <option value="Algeria">Algeria</option>
+          
+            </select>
+          
+        </div>
+              <div class="form-group">
+                <label for="p_contact_number">Primary Contact Number</label>
+                <input type="text" class="form-control" id="p_contact_number" name="p_contact_number"  value="" placeholder="primary contact number">
+               
+              </div>
+              
+              <div class="form-group">
+                <label for="s_contact_number">Secondary Contact Number</label>
+                <input type="text" class="form-control" id="s_contact_number" name="s_contact_number"  value="" placeholder="secondary contact number">
+               
+              </div>
+         
+              
+            <button type="submit " class="btn btn-primary" onclick="edit.updateData()">Submit</button>
+          <!-- </form> -->
+          </div>
+
+
+           <script src="edit.js"></script>
+          <!-- <script>
+            function check(event) {
+                document.getElementById('message').innerHTML = "checking";
+        
+                const url = "https://localhost:44386/api/blog/user/1";
+                const data = {
+                    'name' : document.getElementById('firstname').value+document.getElementById('middlename').value+document.getElementById('lastname').value,
+                    'address' : document.getElementById('addressLine1').value+document.getElementById('addressLine1').value,
+                    'primary Number':document.getElementById('p_contact_number').value,
+                    'secondary Number':document.getElementById('s_contact_number').value
+                };
+                const other_params = {
+                    headers : { "content-type" : "application/json; charset=UTF-8" },
+                    body : data,
+                    method : "POST",
+                    mode : "cors"
+                };
+        
+                fetch(url, other_params)
+                    .then(function(response) {
+                        if (response.ok) {
+                            alert(response.json());
+                        } else {
+                            throw new Error("Could not reach the API: " + response.statusText);
+                        }
+                    }).then(function(data) {
+                        document.getElementById("message").innerHTML = data.encoded;
+                    }).catch(function(error) {
+                        document.getElementById("message").innerHTML = error.message;
+                    });
+                return false;
+            }
+        </script>
+         -->
+         <script src=""></script>
+    </body>
+</html>
