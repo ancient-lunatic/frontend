@@ -23,15 +23,30 @@ class ContentGenerate
     headerTag = (document.getElementById("dynamic") as HTMLInputElement);
 
 
+
+create()
+{
+        
+           var  url = 'C:/Users/ssrawat/Desktop/frontend/script/create.html'
+    
+        document.location.href = url;
+    
+}
+
+
+edit(id)
+{
+    var b = document.getElementById(id).getAttribute("dataval");
+    var  url = 'C:/Users/ssrawat/Desktop/frontend/script/userform.html?name='+ + encodeURIComponent(b);
+    document.location.href = url;
+
+    
+}
     sortDatabyName()
     {
         let drop = (document.getElementById("drop") as HTMLSelectElement);
 
 
-        // if("suraj" < "surai")
-        // console.log("yes")
-        // if("sures" > "suraj")
-        // console.log("np")
         if(drop.selectedIndex == 2)
         {
         this.data.sort(this.SortByName)
@@ -66,8 +81,7 @@ class ContentGenerate
         }
         else 
         return 0;
-        
-      // return ((a.age.months < b.age.months) ? -1 : ((a.age.months>b.age.months) ? 1 : 0));
+    
    }
 
     async searchUsers()
@@ -79,7 +93,6 @@ class ContentGenerate
         let data =await this.getApiCall(uri);
         this.data = await data;
         console.log(data);
-
         this.dynamicGenerate();
         return data;
 
@@ -110,31 +123,23 @@ class ContentGenerate
     async DeleteUserById(id)
     {
        let x =  document.getElementById(id).getAttribute("dataval");
-        //let input = (document.getElementById("search") as  HTMLInputElement);
-     
-        //let keys = input.value;
         let uri = "https://localhost:44386/api/blog/userdel/"+x+"";
         let response = await fetch(uri,
             {
             method: 'DELETE',
-         
-            // body: JSON.stringify()
-        })
-       // let data =await this.getApiCall(uri);
-        //this.data = await data;
+            })
         console.log(this.data);
         this.getAllUser();
-        // return data;
     }
 
 
 
-     navigate(id) {
-        let x =  document.getElementById(id).getAttribute("dataval");
-        localStorage["id"]= x;
-          let  url = "file:///C:/Users/ssrawat/Desktop/frontend/script/userform.html";
-        document.location.href = url;
-    }
+    //  navigate(id) {
+    //     let x =  document.getElementById(id).getAttribute("dataval");
+    //     localStorage["id"]= x;
+    //       let  url = "file:///C:/Users/ssrawat/Desktop/frontend/script/userform.html";
+    //     document.location.href = url;
+    // }
 
     dynamicGenerate()
     {
@@ -148,7 +153,7 @@ class ContentGenerate
    
                 <div class="thumbnail" style=" background-color :cadetblue;padding :20Px;line-height : 26pt; border-radius: 25px;"> 
                     <button id ="user${loop}" dataval="${this.data[loop]["userId"]}"  style="float:right; font-size:15px;" onClick ="new ContentGenerate().DeleteUserById(this.id)">DELETE</button>
-                    <button class="btn btn-success" id ="user${loop}" dataval="${this.data[loop]["userId"]}"style="float:left; font-size:15px;" onClick = "sam.navigate(this.id)">EDIT</button>
+                    <button class="btn btn-success" id ="user${loop}" dataval="${this.data[loop]["userId"]}"style="float:left; font-size:15px;" onClick = "sam.edit(this.id)">EDIT</button>
                     <br>
                        
                     <p ><strong id="name${loop}">User Name := ${this.data[loop]["name"]}</strong></p>
@@ -171,6 +176,3 @@ class ContentGenerate
 
 }
 var sam = new ContentGenerate()
-
-// let gen = new ContentGenerate()
-// gen.hitApi();

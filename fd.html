@@ -120,11 +120,9 @@
     
     </style>
 </head>
-
 <body>
     <div class="topnav">
         <button class="active" onclick="sam.getAllUser();">All User</button>
-
 
         <select class="sorting" id="drop" >
             <option id="choose_sort">Choose Sort</option>
@@ -132,18 +130,33 @@
             <option value="sortbyname" id="sort_by_name">SORT BY NAME</option>
 
         </select>
-        <button class="active" onclick="sam.sortDatabyName()">sort</button>
-        <button class="active" onclick="location.">sort</button>
 
-        <!-- <div class="search-container"> -->
-            <div style="float : right;">
+  
+        <button class="active" onclick="sam.sortDatabyName()">sort</button>
+      
+      <button class="active" onclick="new ContentGenerate().create();">create new user</button>
+    
+            <div style="float : right; display : block;">
                 <input type="text" placeholder="Search.." name="search by name" id="search" value="">
 
                 <button type="submit" onclick="sam.searchUsers()">search</button>
             </div>
-        <!-- </div> -->
     </div>
+<!-- 
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container" style="display: none;">
+    <h1>Login</h1>
 
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div> -->
 
     
 
@@ -157,9 +170,7 @@
     <div class="" id="usedDetails">
 
     </div>
-    <button type="submit" onclick="location.reload()">
-reloads
-    </button>
+  
      <!-- <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js" data-main="search.js"></script> -->
 
     <script src="new.js"></script>

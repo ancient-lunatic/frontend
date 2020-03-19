@@ -38,12 +38,17 @@ var ContentGenerate = /** @class */ (function () {
     function ContentGenerate() {
         this.headerTag = document.getElementById("dynamic");
     }
+    ContentGenerate.prototype.create = function () {
+        var url = 'C:/Users/ssrawat/Desktop/frontend/script/create.html';
+        document.location.href = url;
+    };
+    ContentGenerate.prototype.edit = function (id) {
+        var b = document.getElementById(id).getAttribute("dataval");
+        var url = 'C:/Users/ssrawat/Desktop/frontend/script/userform.html?name=' + +encodeURIComponent(b);
+        +encodeURIComponent(b);
+    };
     ContentGenerate.prototype.sortDatabyName = function () {
         var drop = document.getElementById("drop");
-        // if("suraj" < "surai")
-        // console.log("yes")
-        // if("sures" > "suraj")
-        // console.log("np")
         if (drop.selectedIndex == 2) {
             this.data.sort(this.SortByName);
             console.log("1");
@@ -70,7 +75,6 @@ var ContentGenerate = /** @class */ (function () {
         }
         else
             return 0;
-        // return ((a.age.months < b.age.months) ? -1 : ((a.age.months>b.age.months) ? 1 : 0));
     };
     ContentGenerate.prototype.searchUsers = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -144,14 +148,9 @@ var ContentGenerate = /** @class */ (function () {
                         uri = "https://localhost:44386/api/blog/userdel/" + x + "";
                         return [4 /*yield*/, fetch(uri, {
                                 method: 'DELETE'
-                            })
-                            // let data =await this.getApiCall(uri);
-                            //this.data = await data;
-                        ];
+                            })];
                     case 1:
                         response = _a.sent();
-                        // let data =await this.getApiCall(uri);
-                        //this.data = await data;
                         console.log(this.data);
                         this.getAllUser();
                         return [2 /*return*/];
@@ -162,8 +161,6 @@ var ContentGenerate = /** @class */ (function () {
     ContentGenerate.prototype.navigate = function (id) {
         var x = document.getElementById(id).getAttribute("dataval");
         localStorage["id"] = x;
-        //var b = document.getElementById('name').value,
-        //   let  url = "file:///C:/Users/ssrawat/Desktop/frontend/script/userform.html?name=" + encodeURIComponent(x);
         var url = "file:///C:/Users/ssrawat/Desktop/frontend/script/userform.html";
         document.location.href = url;
     };
@@ -173,75 +170,7 @@ var ContentGenerate = /** @class */ (function () {
         for (loop = 0; loop < this.data.length; loop++) {
             this.headerTag.innerHTML += "<div class=\"container\" style=\"margin-top:10px;width:30%; float: left;\">\n            <div class=\"row\">\n            <div class=\"col-sm-4\">\n   \n                <div class=\"thumbnail\" style=\" background-color :cadetblue;padding :20Px;line-height : 26pt; border-radius: 25px;\"> \n                    <button id =\"user" + loop + "\" dataval=\"" + this.data[loop]["userId"] + "\"  style=\"float:right; font-size:15px;\" onClick =\"new ContentGenerate().DeleteUserById(this.id)\">DELETE</button>\n                    <button class=\"btn btn-success\" id =\"user" + loop + "\" dataval=\"" + this.data[loop]["userId"] + "\"style=\"float:left; font-size:15px;\" onClick = \"sam.navigate(this.id)\">EDIT</button>\n                    <br>\n                       \n                    <p ><strong id=\"name" + loop + "\">User Name := " + this.data[loop]["name"] + "</strong></p>\n                    <p ><strong id=\"nationality" + loop + "\">Nationality := " + this.data[loop]["nationality"] + "</strong></p>\n                    <p ><strong id=\"isIndian" + loop + "\"> Is Indian := " + (this.data[loop]["isIndian"] == true ? "yes" : "no") + "</strong></p>\n                     <p ><strong id=\"address" + loop + "\">Address :=   " + this.data[loop]["address"] + "</strong></p>\n                    <p ><strong id=\"contactDetail" + loop + "\">Phone Number := " + this.data[loop]["contactDetail"]["primary"] + "</strong></p>\n                    <p ><strong id=\"age" + loop + "\" class=\"address\">age := " + (this.data[loop]["age"]["year"] + " years") + "</strong></p>\n                    <p ><strong id=\"CompanyExp" + loop + "\" class=\"address\">age := " + this.data[loop]["currentCompanyExp"] + "</strong></p>\n                   \n               \n                </div>\n            </div>\n        </div>\n    </div>";
         }
-        // for (loop = 0; loop < this.data.length; loop++)
-        // {
-        //     document.getElementById("name"+loop).innerText += " " + this.data[loop]["name"];
-        //     document.getElementById("nationality"+loop).innerText += " " + this.data[loop]["nationality"];
-        //     document.getElementById("isIndian"+loop).innerText += " " + (this.data[loop]["isIndian"]==true ? "yes" : "no");
-        //     document.getElementById("address"+loop).innerText += " " + this.data[loop]["address"];
-        //     document.getElementById("contactDetail"+loop).innerText += " " + this.data[loop]["contactDetail"]["primary"];
-        //     document.getElementById("age"+loop).innerText += " " + this.data[loop]["age"]["year"] + " years";
-        //     document.getElementById("CompanyExp"+loop).innerText += " " + this.data[loop]["currentCompanyExp"];
-        // }
-    };
-    ContentGenerate.prototype.bindData = function () {
-        this.salutation = (document.getElementById("salutation").selectedIndex) + 1;
-        this.firstName = document.getElementById("firstname").value;
-        this.middleName = document.getElementById("middlename").value;
-        this.lastName = document.getElementById("lastname").value;
-        this.addressLine1 = document.getElementById("addressLine1").value;
-        this.addressLine2 = document.getElementById("addressLine2").value;
-        this.Locality = document.getElementById("locality").value;
-        this.city = (document.getElementById("city").selectedIndex) + 1;
-        this.state = (document.getElementById("state").selectedIndex) + 1;
-        this.country = (document.getElementById("country").selectedIndex) + 1;
-        this.bodyData = {
-            salutation: this.salutation,
-            firstName: this.firstName,
-            middleName: this.middleName,
-            lastName: this.lastName,
-            addressLine1: this.addressLine1,
-            addressLine2: this.addressLine2,
-            Locality: this.Locality,
-            city: this.city,
-            state: this.state,
-            country: this.country
-        };
-    };
-    ContentGenerate.prototype.postData = function () {
-        this.bindData();
-        var url = "https://localhost:44386/api/blog/user/" + 5;
-        return fetch(url, {
-            method: "POST",
-            mode: 'cors',
-            cache: "no-cache",
-            credentials: "same-origin",
-            headers: {
-                "content-Type": "application/json"
-            },
-            redirect: "follow",
-            referrer: "no-referrer",
-            body: JSON.stringify(this.bodyData)
-        })
-            .then(function (response) { return response.json(); });
-    };
-    ContentGenerate.prototype.findData = function (id) {
-        var loop = 0;
-        for (loop = 0; loop < this.data.length; loop++) {
-            if (this.data[loop]["userId"] === id) {
-                break;
-            }
-        }
-        return loop;
-    };
-    ContentGenerate.prototype.onclickEdit = function (id) {
-        var index = this.findData(id);
-        var val = document.getElementById("");
-        val.innerHTML = "";
-        val.innerHTML = "<div class=\"form-group\">\n            \n        <label for=\"salutation\">Choose your salutation</label>\n        <select id=\"salutation\" x>\n          <option value=\"Mr.\">Mr.</option>\n          <option value=\"Mrs.\">Mrs.</option>\n          <option value=\"Miss\">Miss</option>\n          <option value=\"Ms.\">Ms.</option>\n          <option value=\"Dr.\">Dr.</option>\n        </select>\n      </div>\n      \n        <div class=\"form-group\">\n          <label for=\"firstname\">First Name</label>\n          <input type=\"text\" class=\"form-control\" id=\"firstname\" name=\"firstname\"  value=\"" + this.data[index]["FirstName"] + "\" placeholder=\"Enter First Name\">\n         \n        </div>\n        <div class=\"form-group\">\n            <label for=\"middlename\">Middle Name</label>\n            <input type=\"text\" class=\"form-control\" id=\"middlename\" name=\"middlename\"  value=\"" + this.data[index]["middleName"] + "\" placeholder=\"Enter Middle Name\">\n           \n          </div>\n          <div class=\"form-group\">\n            <label for=\"lastname\" >Last Name</label>\n            <input type=\"text\" class=\"form-control\" id=\"lastname\" name=\"lastname\"  value=\"" + this.data[index]["lastName"] + "\" placeholder=\"Enter last Name\">\n           \n          </div>\n          \n        \n            <div class=\"form-group\">\n        \n              <label for=\"salutation\">Choose your Gender</label>\n  \n              <select id=\"salutation\">\n                <option value=\"male\">Male</option>\n                <option value=\"female\">Female</option>\n                <option value=\"other\">Others</option>\n               \n              </select>\n  \n            \n\n          </div>\n          <div class=\"form-group\">\n            <label for=\"addressLine1\">AddressLine1</label>\n            <input type=\"text\" class=\"form-control\" id=\"addressLine1\" name=\"addressLine1\"  value=\"" + this.data[index]["addressLine1"] + "\" placeholder=\"Enter addressLine1\">\n           \n          </div>\n          <div class=\"form-group\">\n            <label for=\"addressLine2\">AddressLine2</label>\n            <input type=\"text\" class=\"form-control\" id=\"addressLine2\" name=\"addressLine2\"  value=\"" + this.data[index]["addressLine2"] + "\" placeholder=\"Enter addressLine2\">\n           \n          </div>\n          <div class=\"form-group\">\n            <label for=\"Locality\">Locality</label>\n            <input type=\"text\" class=\"form-control\" id=\"locality\" name=\"locality\"  value=\"" + this.data[index]["locality"] + "\" placeholder=\"Enter Locality\">\n           \n          </div>\n          <div class=\"form-group\">\n        \n            <label for=\"city\">City</label>\n\n            <select id=\"city\">\n              <option value=\"Waras\">Waras</option>\n              <option value=\"Orange\">Orange</option>\n              <option value=\"NewCastel\">NewCastel</option>\n             \n            </select>\n\n          \n\n        </div>\n        <div class=\"form-group\">\n        \n          <label for=\"state\">State</label>\n\n          <select id=\"state\">\n            <option value=\"Bamyan\">Bamyan</option>\n            <option value=\"B\u00E9ja\u00EFa\">Bejala</option>\n            \n           \n          </select>\n\n        \n      </div>\n      <div class=\"form-group\">\n        \n        <label for=\"country\">Country</label>\n        <select id=\"country\">\n          <option value=\"Afganistan\">Afghanistan</option>\n          <option value=\"Algeria\">Algeria</option>\n      \n        </select>\n      \n    </div>\n          <div class=\"form-group\">\n            <label for=\"p_contact_number\">Primary Contact Number</label>\n            <input type=\"text\" class=\"form-control\" id=\"p_contact_number\" name=\"p_contact_number\"  value=\"\" placeholder=\"primary contact number\">\n           \n          </div>\n          \n          <div class=\"form-group\">\n            <label for=\"s_contact_number\">Secondary Contact Number</label>\n            <input type=\"text\" class=\"form-control\" id=\"s_contact_number\" name=\"s_contact_number\"  value=\"\" placeholder=\"secondary contact number\">\n           \n          </div>\n     \n          \n        <button type=\"submit \" onclick=\"check()\" class=\"btn btn-primary\">Submit</button>";
     };
     return ContentGenerate;
 }());
 var sam = new ContentGenerate();
-// let gen = new ContentGenerate()
-// gen.hitApi();
